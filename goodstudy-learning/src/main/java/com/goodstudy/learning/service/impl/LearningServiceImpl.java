@@ -67,6 +67,9 @@ public class LearningServiceImpl implements LearningService {
         learningRepo.deleteById(id);
     }
 
+    // 类中定义
+    private final ConcurrentHashMap<Long, Object> learningLocks = new ConcurrentHashMap<>();
+
     @Override
     @Transactional
     public ProgressDto updateProgress(Long learningId, int percentage) {
@@ -74,8 +77,10 @@ public class LearningServiceImpl implements LearningService {
         LearningEntity learning = learningRepo.findById(learningId)
                 .orElseThrow(() -> new NotFoundException("Learning not found: " + learningId));
 
+        Object lock = learningLocks.computeIfAbsent(learningId, id -> new Object());
+
         // simulate concurrent-safe update by retrying optimistic update
-        synchronized (("" + learningId).intern()) {
+        synchronized (lock) {
             ProgressEntity progress = progressRepo.findByLearningId(learningId).stream()
                     .findFirst()
                     .orElse(ProgressEntity.builder().learning(learning).build());
