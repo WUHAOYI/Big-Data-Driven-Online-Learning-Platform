@@ -130,6 +130,7 @@ public class LearningServiceImpl implements LearningService {
         }
     }
 
+    @Transactional
     // Bulk asynchronous import that returns future summary
     public Future<Map<String,Integer>> importCoursesAsync(List<CourseDto> dtos) {
         return executor.submit(() -> {
