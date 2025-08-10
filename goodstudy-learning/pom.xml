@@ -10,6 +10,7 @@
   </parent>
 
   <artifactId>goodstudy-learning</artifactId>
+  <version>1.0.0</version>
   <packaging>jar</packaging>
 
   <dependencies>

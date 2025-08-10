@@ -1,13 +1,17 @@
-# 忽略编译输出
-/target/
+# 忽略编译生成的target目录
+target/
+
+# 忽略IDE相关文件（可选）
+*.iml
+.idea/
+.vscode/
+
+# 忽略操作系统文件（可选）
+.DS_Store
+Thumbs.db
 
 # 忽略日志文件
 *.log
 
-# 忽略 IDE 配置
-.idea/
-.vscode/
-
-# 忽略系统文件
-Thumbs.db
-.DS_Store
+# 忽略编译产生的class文件（如果有）
+*.class
