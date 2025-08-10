@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<testsuite xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="https://maven.apache.org/surefire/maven-surefire-plugin/xsd/surefire-test-report-3.0.xsd" version="3.0" name="com.goodstudy.learning.service.LearningServiceImplTest" time="0.035" tests="10" errors="0" skipped="0" failures="0">
+<testsuite xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="https://maven.apache.org/surefire/maven-surefire-plugin/xsd/surefire-test-report-3.0.xsd" version="3.0" name="com.goodstudy.learning.service.ExamServiceImplTest" time="0.067" tests="3" errors="0" skipped="0" failures="0">
   <properties>
     <property name="java.specification.version" value="17"/>
     <property name="sun.cpu.isalist" value="amd64"/>
@@ -67,14 +67,7 @@
     <property name="sun.io.unicode.encoding" value="UnicodeLittle"/>
     <property name="java.class.version" value="61.0"/>
   </properties>
-  <testcase name="createLearning_courseNotFound" classname="com.goodstudy.learning.service.LearningServiceImplTest" time="0.003"/>
-  <testcase name="findCourse_absent" classname="com.goodstudy.learning.service.LearningServiceImplTest" time="0.003"/>
-  <testcase name="findAllLearnings_nonEmpty" classname="com.goodstudy.learning.service.LearningServiceImplTest" time="0.002"/>
-  <testcase name="updateProgress_invalidPercentage" classname="com.goodstudy.learning.service.LearningServiceImplTest" time="0.002"/>
-  <testcase name="findLearningById_notFound" classname="com.goodstudy.learning.service.LearningServiceImplTest" time="0.002"/>
-  <testcase name="createCourse_and_updateCourse_and_list" classname="com.goodstudy.learning.service.LearningServiceImplTest" time="0.005"/>
-  <testcase name="createLearning_success" classname="com.goodstudy.learning.service.LearningServiceImplTest" time="0.004"/>
-  <testcase name="updateProgress_newProgress" classname="com.goodstudy.learning.service.LearningServiceImplTest" time="0.002"/>
-  <testcase name="deleteLearning_notFound" classname="com.goodstudy.learning.service.LearningServiceImplTest" time="0.002"/>
-  <testcase name="findLearningById_found" classname="com.goodstudy.learning.service.LearningServiceImplTest" time="0.002"/>
+  <testcase name="createExam_success" classname="com.goodstudy.learning.service.ExamServiceImplTest" time="0.062"/>
+  <testcase name="createExam_courseNotFound" classname="com.goodstudy.learning.service.ExamServiceImplTest" time="0.002"/>
+  <testcase name="listByCourse_returnsList" classname="com.goodstudy.learning.service.ExamServiceImplTest" time="0.002"/>
 </testsuite>

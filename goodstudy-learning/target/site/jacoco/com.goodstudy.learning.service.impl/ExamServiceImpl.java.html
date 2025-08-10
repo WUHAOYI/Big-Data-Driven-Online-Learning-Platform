@@ -1,0 +1,66 @@
+<?xml version="1.0" encoding="UTF-8"?><!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd"><html xmlns="http://www.w3.org/1999/xhtml" lang="zh"><head><meta http-equiv="Content-Type" content="text/html;charset=UTF-8"/><link rel="stylesheet" href="../jacoco-resources/report.css" type="text/css"/><link rel="shortcut icon" href="../jacoco-resources/report.gif" type="image/gif"/><title>ExamServiceImpl.java</title><link rel="stylesheet" href="../jacoco-resources/prettify.css" type="text/css"/><script type="text/javascript" src="../jacoco-resources/prettify.js"></script></head><body onload="window['PR_TAB_WIDTH']=4;prettyPrint()"><div class="breadcrumb" id="breadcrumb"><span class="info"><a href="../jacoco-sessions.html" class="el_session">Sessions</a></span><a href="../index.html" class="el_report">goodstudy-learning</a> &gt; <a href="index.source.html" class="el_package">com.goodstudy.learning.service.impl</a> &gt; <span class="el_source">ExamServiceImpl.java</span></div><h1>ExamServiceImpl.java</h1><pre class="source lang-java linenums">package com.goodstudy.learning.service.impl;
+
+import com.goodstudy.learning.service.ExamService;
+import com.goodstudy.learning.dto.*;
+import com.goodstudy.learning.model.*;
+import com.goodstudy.learning.repository.*;
+import com.goodstudy.learning.exception.NotFoundException;
+import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
+import java.util.*;
+import java.util.stream.*;
+
+@Service
+public class ExamServiceImpl implements ExamService {
+    private final ExamRepository examRepo;
+    private final CourseRepository courseRepo;
+
+<span class="fc" id="L18">    public ExamServiceImpl(ExamRepository examRepo, CourseRepository courseRepo) {</span>
+<span class="fc" id="L19">        this.examRepo = examRepo;</span>
+<span class="fc" id="L20">        this.courseRepo = courseRepo;</span>
+<span class="fc" id="L21">    }</span>
+
+    @Override
+    @Transactional
+    public ExamDto createExam(ExamDto dto) {
+<span class="fc" id="L26">        CourseEntity course = courseRepo.findById(dto.getCourseId()).orElseThrow(() -&gt; new NotFoundException(&quot;Course not found: &quot; + dto.getCourseId()));</span>
+<span class="fc" id="L27">        ExamEntity e = ExamEntity.builder()</span>
+<span class="fc" id="L28">                .title(dto.getTitle())</span>
+<span class="fc" id="L29">                .course(course)</span>
+<span class="fc" id="L30">                .scheduledAt(dto.getScheduledAt())</span>
+<span class="fc" id="L31">                .durationMinutes(dto.getDurationMinutes())</span>
+<span class="fc" id="L32">                .instructions(dto.getInstructions())</span>
+<span class="fc" id="L33">                .published(dto.isPublished())</span>
+<span class="fc" id="L34">                .build();</span>
+<span class="fc" id="L35">        ExamEntity saved = examRepo.save(e);</span>
+<span class="fc" id="L36">        return toDto(saved);</span>
+    }
+
+    @Override
+    public Optional&lt;ExamDto&gt; findExam(Long id) {
+<span class="nc" id="L41">        return examRepo.findById(id).map(this::toDto);</span>
+    }
+
+    @Override
+    public List&lt;ExamDto&gt; listByCourse(Long courseId) {
+<span class="fc" id="L46">        return examRepo.findByCourseId(courseId).stream().map(this::toDto).collect(Collectors.toList());</span>
+    }
+
+    @Override
+    public void deleteExam(Long id) {
+<span class="nc" id="L51">        examRepo.deleteById(id);</span>
+<span class="nc" id="L52">    }</span>
+
+    private ExamDto toDto(ExamEntity e) {
+<span class="fc" id="L55">        return ExamDto.builder()</span>
+<span class="fc" id="L56">                .id(e.getId())</span>
+<span class="fc" id="L57">                .title(e.getTitle())</span>
+<span class="fc bfc" id="L58" title="All 2 branches covered.">                .courseId(e.getCourse() == null ? null : e.getCourse().getId())</span>
+<span class="fc" id="L59">                .scheduledAt(e.getScheduledAt())</span>
+<span class="fc" id="L60">                .durationMinutes(e.getDurationMinutes())</span>
+<span class="fc" id="L61">                .instructions(e.getInstructions())</span>
+<span class="fc" id="L62">                .published(e.isPublished())</span>
+<span class="fc" id="L63">                .build();</span>
+    }
+}
+</pre><div class="footer"><span class="right">Created with <a href="http://www.jacoco.org/jacoco">JaCoCo</a> 0.8.10.202304240956</span></div></body></html>

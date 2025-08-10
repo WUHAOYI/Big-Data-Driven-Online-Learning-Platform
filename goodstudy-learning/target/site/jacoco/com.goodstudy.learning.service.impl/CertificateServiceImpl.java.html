@@ -1,0 +1,70 @@
+<?xml version="1.0" encoding="UTF-8"?><!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd"><html xmlns="http://www.w3.org/1999/xhtml" lang="zh"><head><meta http-equiv="Content-Type" content="text/html;charset=UTF-8"/><link rel="stylesheet" href="../jacoco-resources/report.css" type="text/css"/><link rel="shortcut icon" href="../jacoco-resources/report.gif" type="image/gif"/><title>CertificateServiceImpl.java</title><link rel="stylesheet" href="../jacoco-resources/prettify.css" type="text/css"/><script type="text/javascript" src="../jacoco-resources/prettify.js"></script></head><body onload="window['PR_TAB_WIDTH']=4;prettyPrint()"><div class="breadcrumb" id="breadcrumb"><span class="info"><a href="../jacoco-sessions.html" class="el_session">Sessions</a></span><a href="../index.html" class="el_report">goodstudy-learning</a> &gt; <a href="index.source.html" class="el_package">com.goodstudy.learning.service.impl</a> &gt; <span class="el_source">CertificateServiceImpl.java</span></div><h1>CertificateServiceImpl.java</h1><pre class="source lang-java linenums">package com.goodstudy.learning.service.impl;
+
+import com.goodstudy.learning.service.CertificateService;
+import com.goodstudy.learning.dto.*;
+import com.goodstudy.learning.model.*;
+import com.goodstudy.learning.repository.*;
+import com.goodstudy.learning.exception.NotFoundException;
+import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
+import java.time.*;
+import java.util.*;
+import java.util.stream.*;
+import java.util.UUID;
+
+@Service
+public class CertificateServiceImpl implements CertificateService {
+    private final CertificateRepository certRepo;
+    private final LearningRepository learningRepo;
+    private final ProgressRepository progressRepo;
+
+<span class="fc" id="L21">    public CertificateServiceImpl(CertificateRepository certRepo, LearningRepository learningRepo, ProgressRepository progressRepo) {</span>
+<span class="fc" id="L22">        this.certRepo = certRepo;</span>
+<span class="fc" id="L23">        this.learningRepo = learningRepo;</span>
+<span class="fc" id="L24">        this.progressRepo = progressRepo;</span>
+<span class="fc" id="L25">    }</span>
+
+    @Override
+    @Transactional
+    public CertificateDto issueCertificate(Long learningId, String title) {
+<span class="fc" id="L30">        LearningEntity l = learningRepo.findById(learningId).orElseThrow(() -&gt; new NotFoundException(&quot;Learning not found: &quot; + learningId));</span>
+        // require progress 100 to issue certificate
+<span class="fc" id="L32">        int progress = progressRepo.findByLearningId(learningId).stream().findFirst().map(ProgressEntity::getPercentage).orElse(0);</span>
+<span class="fc bfc" id="L33" title="All 2 branches covered.">        if (progress &lt; 100) throw new IllegalArgumentException(&quot;Cannot issue certificate: progress &lt; 100&quot;);</span>
+<span class="fc" id="L34">        CertificateEntity c = CertificateEntity.builder()</span>
+<span class="fc" id="L35">                .code(generateCode(learningId))</span>
+<span class="fc" id="L36">                .recipient(l.getLearnerName())</span>
+<span class="fc" id="L37">                .issuedAt(LocalDateTime.now())</span>
+<span class="fc" id="L38">                .title(title)</span>
+<span class="fc" id="L39">                .learning(l)</span>
+<span class="fc" id="L40">                .build();</span>
+<span class="fc" id="L41">        CertificateEntity saved = certRepo.save(c);</span>
+<span class="fc" id="L42">        return toDto(saved);</span>
+    }
+
+    private String generateCode(Long learningId) {
+<span class="fc" id="L46">        return &quot;CERT-&quot; + learningId + &quot;-&quot; + UUID.randomUUID().toString().substring(0,8).toUpperCase();</span>
+    }
+
+    @Override
+    public Optional&lt;CertificateDto&gt; findCertificate(Long id) {
+<span class="nc" id="L51">        return certRepo.findById(id).map(this::toDto);</span>
+    }
+
+    @Override
+    public List&lt;CertificateDto&gt; listCertificatesForLearning(Long learningId) {
+<span class="nc" id="L56">        return certRepo.findByLearningId(learningId).stream().map(this::toDto).collect(Collectors.toList());</span>
+    }
+
+    private CertificateDto toDto(CertificateEntity e) {
+<span class="fc" id="L60">        return CertificateDto.builder()</span>
+<span class="fc" id="L61">                .id(e.getId())</span>
+<span class="fc" id="L62">                .code(e.getCode())</span>
+<span class="fc" id="L63">                .recipient(e.getRecipient())</span>
+<span class="fc" id="L64">                .issuedAt(e.getIssuedAt())</span>
+<span class="fc" id="L65">                .title(e.getTitle())</span>
+<span class="pc bpc" id="L66" title="1 of 2 branches missed.">                .learningId(e.getLearning() == null ? null : e.getLearning().getId())</span>
+<span class="fc" id="L67">                .build();</span>
+    }
+}
+</pre><div class="footer"><span class="right">Created with <a href="http://www.jacoco.org/jacoco">JaCoCo</a> 0.8.10.202304240956</span></div></body></html>

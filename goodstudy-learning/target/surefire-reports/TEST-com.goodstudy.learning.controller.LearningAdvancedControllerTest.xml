@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<testsuite xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="https://maven.apache.org/surefire/maven-surefire-plugin/xsd/surefire-test-report-3.0.xsd" version="3.0" name="com.goodstudy.learning.service.LearningServiceImplTest" time="0.035" tests="10" errors="0" skipped="0" failures="0">
+<testsuite xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="https://maven.apache.org/surefire/maven-surefire-plugin/xsd/surefire-test-report-3.0.xsd" version="3.0" name="com.goodstudy.learning.controller.LearningAdvancedControllerTest" time="0.108" tests="3" errors="0" skipped="0" failures="0">
   <properties>
     <property name="java.specification.version" value="17"/>
     <property name="sun.cpu.isalist" value="amd64"/>
@@ -9,9 +9,7 @@
     <property name="sun.arch.data.model" value="64"/>
     <property name="user.variant" value=""/>
     <property name="java.vendor.url" value="https://adoptium.net/"/>
-    <property name="catalina.useNaming" value="false"/>
     <property name="user.timezone" value="Asia/Shanghai"/>
-    <property name="org.jboss.logging.provider" value="slf4j"/>
     <property name="os.name" value="Windows 10"/>
     <property name="java.vm.specification.version" value="17"/>
     <property name="sun.java.launcher" value="SUN_STANDARD"/>
@@ -32,8 +30,6 @@
     <property name="line.separator" value="&#10;"/>
     <property name="java.vm.specification.vendor" value="Oracle Corporation"/>
     <property name="java.specification.name" value="Java Platform API Specification"/>
-    <property name="FILE_LOG_CHARSET" value="GBK"/>
-    <property name="java.awt.headless" value="true"/>
     <property name="surefire.real.class.path" value="C:\Users\Administrator\AppData\Local\Temp\surefire15161845350580159900\surefirebooter-20250810165017123_3.jar"/>
     <property name="user.script" value=""/>
     <property name="sun.management.compiler" value="HotSpot 64-Bit Tiered Compilers"/>
@@ -49,16 +45,11 @@
     <property name="java.vendor.url.bug" value="https://github.com/adoptium/adoptium-support/issues"/>
     <property name="java.io.tmpdir" value="C:\Users\ADMINI~1\AppData\Local\Temp\"/>
     <property name="idea.version" value="2024.1"/>
-    <property name="catalina.home" value="C:\Users\Administrator\AppData\Local\Temp\tomcat.0.4797168888623625317"/>
-    <property name="com.zaxxer.hikari.pool_number" value="1"/>
     <property name="java.version" value="17.0.7"/>
     <property name="user.dir" value="D:\codes\java\Big-Data-Driven-Online-Learning-Platform\goodstudy-learning"/>
     <property name="os.arch" value="amd64"/>
     <property name="java.vm.specification.name" value="Java Virtual Machine Specification"/>
-    <property name="PID" value="30764"/>
     <property name="sun.os.patch.level" value=""/>
-    <property name="CONSOLE_LOG_CHARSET" value="GBK"/>
-    <property name="catalina.base" value="C:\Users\Administrator\AppData\Local\Temp\tomcat.0.4797168888623625317"/>
     <property name="native.encoding" value="GBK"/>
     <property name="java.library.path" value="D:\Java\openJDK17\bin;C:\Windows\Sun\Java\bin;C:\Windows\system32;C:\Windows;D:\VMware\bin\;D:\Java\openJDK17\bin;C:\Program Files (x86)\Common Files\Oracle\Java\javapath;C:\Windows\system32;C:\Windows;C:\Windows\System32\Wbem;C:\Windows\System32\WindowsPowerShell\v1.0\;C:\Windows\System32\OpenSSH\;D:\hadoop\hadoop-3.1.0\bin;C:\Program Files\TortoiseSVN\bin;D:\nodejs\node_global;D:;xftp\;D:\MySql\bin;D:\codes\cloc;D:\protobuf\protoc-25.1-win64\bin;D:\maven\apache-maven-3.6.3\bin;D:\xftp\;D:\tomcat\apache-tomcat-9.0.63\bin;D:\微信开发者工具\微信web开发者工具\dll;C:\Program Fi;es\dotnet\;C:\Program Files\Docker\Docker\resources\bin;D:\chromedriver-win64-130.0.6723.70;D:\nodejs;C:\Program Files\dotnet\;C:\Program Files\PostgreSQL\13\bin;C:\ProgramData\chocolatey\bin;D:\git\Git\cmd;D:\xhsell\;C:\Users\Administrator\AppData\Local\Programs\Python\Python312\Scripts\;C:\Users\Administrator\AppData\Local\Programs\Python\Python312\;C:\Users\Administrator\AppData\Local\Microsoft\WindowsApps;D:\nodejs\node_global;D:\IDEA\IntelliJ IDEA 2023.1.2\bin;;D:\pycharm\PyCharm 2023.2.1\bin;;D:\VScode\Microsoft VS Code\bin;D:\dataGrip\DataGrip 2023.2\bin;;D:\ffmpeg\ffmpeg-6.0-essentials_build\bin;;."/>
     <property name="java.vm.info" value="mixed mode, sharing"/>
@@ -67,14 +58,25 @@
     <property name="sun.io.unicode.encoding" value="UnicodeLittle"/>
     <property name="java.class.version" value="61.0"/>
   </properties>
-  <testcase name="createLearning_courseNotFound" classname="com.goodstudy.learning.service.LearningServiceImplTest" time="0.003"/>
-  <testcase name="findCourse_absent" classname="com.goodstudy.learning.service.LearningServiceImplTest" time="0.003"/>
-  <testcase name="findAllLearnings_nonEmpty" classname="com.goodstudy.learning.service.LearningServiceImplTest" time="0.002"/>
-  <testcase name="updateProgress_invalidPercentage" classname="com.goodstudy.learning.service.LearningServiceImplTest" time="0.002"/>
-  <testcase name="findLearningById_notFound" classname="com.goodstudy.learning.service.LearningServiceImplTest" time="0.002"/>
-  <testcase name="createCourse_and_updateCourse_and_list" classname="com.goodstudy.learning.service.LearningServiceImplTest" time="0.005"/>
-  <testcase name="createLearning_success" classname="com.goodstudy.learning.service.LearningServiceImplTest" time="0.004"/>
-  <testcase name="updateProgress_newProgress" classname="com.goodstudy.learning.service.LearningServiceImplTest" time="0.002"/>
-  <testcase name="deleteLearning_notFound" classname="com.goodstudy.learning.service.LearningServiceImplTest" time="0.002"/>
-  <testcase name="findLearningById_found" classname="com.goodstudy.learning.service.LearningServiceImplTest" time="0.002"/>
+  <testcase name="transfer_ok" classname="com.goodstudy.learning.controller.LearningAdvancedControllerTest" time="0.075">
+    <system-out><![CDATA[16:50:22.521 [main] INFO org.springframework.mock.web.MockServletContext -- Initializing Spring TestDispatcherServlet ''
+16:50:22.522 [main] INFO org.springframework.test.web.servlet.TestDispatcherServlet -- Initializing Servlet ''
+16:50:22.522 [main] INFO org.springframework.test.web.servlet.TestDispatcherServlet -- Completed initialization in 0 ms
+16:50:22.526 [main] WARN org.springframework.core.LocalVariableTableParameterNameDiscoverer -- Using deprecated '-debug' fallback for parameter name resolution. Compile the affected code with '-parameters' instead or avoid its introspection: com.goodstudy.learning.controller.LearningAdvancedController
+]]></system-out>
+  </testcase>
+  <testcase name="byLearner_ok" classname="com.goodstudy.learning.controller.LearningAdvancedControllerTest" time="0.016">
+    <system-out><![CDATA[16:50:22.543 [main] INFO org.springframework.mock.web.MockServletContext -- Initializing Spring TestDispatcherServlet ''
+16:50:22.543 [main] INFO org.springframework.test.web.servlet.TestDispatcherServlet -- Initializing Servlet ''
+16:50:22.543 [main] INFO org.springframework.test.web.servlet.TestDispatcherServlet -- Completed initialization in 0 ms
+16:50:22.546 [main] WARN org.springframework.core.LocalVariableTableParameterNameDiscoverer -- Using deprecated '-debug' fallback for parameter name resolution. Compile the affected code with '-parameters' instead or avoid its introspection: com.goodstudy.learning.controller.LearningAdvancedController
+]]></system-out>
+  </testcase>
+  <testcase name="withdraw_ok" classname="com.goodstudy.learning.controller.LearningAdvancedControllerTest" time="0.012">
+    <system-out><![CDATA[16:50:22.559 [main] INFO org.springframework.mock.web.MockServletContext -- Initializing Spring TestDispatcherServlet ''
+16:50:22.559 [main] INFO org.springframework.test.web.servlet.TestDispatcherServlet -- Initializing Servlet ''
+16:50:22.560 [main] INFO org.springframework.test.web.servlet.TestDispatcherServlet -- Completed initialization in 0 ms
+16:50:22.562 [main] WARN org.springframework.core.LocalVariableTableParameterNameDiscoverer -- Using deprecated '-debug' fallback for parameter name resolution. Compile the affected code with '-parameters' instead or avoid its introspection: com.goodstudy.learning.controller.LearningAdvancedController
+]]></system-out>
+  </testcase>
 </testsuite>
