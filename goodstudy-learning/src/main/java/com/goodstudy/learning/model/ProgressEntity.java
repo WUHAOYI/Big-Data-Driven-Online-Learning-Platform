@@ -1,22 +1,30 @@
 package com.goodstudy.learning.model;
 
-import jakarta.persistence.*;
 import lombok.*;
+import jakarta.persistence.*;
+import java.time.*;
 
 @Entity
-@Table(name = "progress_tbl")
-@Getter
-@Setter
+@Table(name = "progress")
+@Data
 @NoArgsConstructor
 @AllArgsConstructor
 @Builder
 public class ProgressEntity {
     @Id
-    @GeneratedValue(strategy = GenerationType.AUTO)
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
 
-    @OneToOne
+    private int percentage;
+    private LocalDateTime updatedAt;
+
+    @ManyToOne
+    @JoinColumn(name = "learning_id")
     private LearningEntity learning;
 
-    private int percentage; // 进度百分比
+    @PrePersist
+    @PreUpdate
+    public void touch() {
+        updatedAt = LocalDateTime.now();
+    }
 }

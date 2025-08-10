@@ -1,1 +1,14 @@
 com\goodstudy\learning\service\LearningServiceImplTest.class
+com\goodstudy\learning\controller\CourseAdminControllerTest.class
+com\goodstudy\learning\service\LearningServiceEdgeCasesTest.class
+com\goodstudy\learning\controller\LearningAdvancedControllerTest.class
+com\goodstudy\learning\util\StringUtilTest.class
+com\goodstudy\learning\integration\IntegrationTests.class
+com\goodstudy\learning\controller\LearningControllerTest.class
+com\goodstudy\learning\mapping\LearningMapperTest.class
+com\goodstudy\learning\service\CourseExtendedServiceImplTest.class
+com\goodstudy\learning\service\CertificateServiceImplTest.class
+com\goodstudy\learning\service\GradeServiceImplTest.class
+com\goodstudy\learning\integration\CertificateIntegrationTest.class
+com\goodstudy\learning\validator\ProgressValidatorTest.class
+com\goodstudy\learning\service\ExamServiceImplTest.class

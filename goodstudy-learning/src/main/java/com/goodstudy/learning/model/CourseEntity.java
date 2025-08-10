@@ -1,21 +1,25 @@
 package com.goodstudy.learning.model;
 
-import jakarta.persistence.*;
 import lombok.*;
+import jakarta.persistence.*;
+import java.util.*;
 
 @Entity
-@Table(name = "course_tbl")
-@Getter
-@Setter
+@Table(name = "courses")
+@Data
 @NoArgsConstructor
 @AllArgsConstructor
 @Builder
 public class CourseEntity {
     @Id
-    @GeneratedValue(strategy = GenerationType.AUTO)
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
+    private String title;
+    @Column(length = 4000)
+    private String description;
+    private String level;
+    private boolean published;
 
-    private String title;        // 课程标题
-    private String description;  // 课程描述
-    private String level;        // 难度级别，例如 Beginner, Intermediate, Advanced
+    @OneToMany(mappedBy = "course", cascade = CascadeType.ALL, orphanRemoval = true)
+    private List<LearningEntity> learnings = new ArrayList<>();
 }

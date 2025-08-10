@@ -1,22 +1,28 @@
 package com.goodstudy.learning.model;
 
-import jakarta.persistence.*;
 import lombok.*;
+import jakarta.persistence.*;
+import java.time.*;
 
 @Entity
-@Table(name = "learning_tbl")
-@Getter
-@Setter
+@Table(name = "learnings")
+@Data
 @NoArgsConstructor
 @AllArgsConstructor
 @Builder
 public class LearningEntity {
     @Id
-    @GeneratedValue(strategy = GenerationType.AUTO)
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
+    private String learnerName;
+    private LocalDateTime enrolledAt;
 
     @ManyToOne
-    private CourseEntity course; // 所属课程
+    @JoinColumn(name = "course_id")
+    private CourseEntity course;
 
-    private String learnerName;  // 学习者名字
+    @PrePersist
+    public void prePersist() {
+        if (enrolledAt == null) enrolledAt = LocalDateTime.now();
+    }
 }
