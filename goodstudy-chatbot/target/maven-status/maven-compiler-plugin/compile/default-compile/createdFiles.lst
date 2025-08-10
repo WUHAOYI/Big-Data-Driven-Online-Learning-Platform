@@ -1,0 +1,9 @@
+com\goodstudy\chatbot\ChatbotApplication.class
+com\goodstudy\chatbot\model\dto\ChatbotDto$ChatbotDtoBuilder.class
+com\goodstudy\chatbot\api\ChatbotController.class
+com\goodstudy\chatbot\model\ChatbotEntity.class
+com\goodstudy\chatbot\repository\ChatbotEntityRepository.class
+com\goodstudy\chatbot\service\impl\ChatbotServiceImpl.class
+com\goodstudy\chatbot\service\ChatbotService.class
+com\goodstudy\chatbot\model\ChatbotEntity$ChatbotEntityBuilder.class
+com\goodstudy\chatbot\model\dto\ChatbotDto.class

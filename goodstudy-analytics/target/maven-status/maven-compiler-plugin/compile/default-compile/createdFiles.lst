@@ -1,0 +1,9 @@
+com\goodstudy\analytics\model\AnalyticsEntity$AnalyticsEntityBuilder.class
+com\goodstudy\analytics\model\AnalyticsEntity.class
+com\goodstudy\analytics\service\AnalyticsService.class
+com\goodstudy\analytics\api\AnalyticsController.class
+com\goodstudy\analytics\repository\AnalyticsEntityRepository.class
+com\goodstudy\analytics\model\dto\AnalyticsDto.class
+com\goodstudy\analytics\service\impl\AnalyticsServiceImpl.class
+com\goodstudy\analytics\AnalyticsApplication.class
+com\goodstudy\analytics\model\dto\AnalyticsDto$AnalyticsDtoBuilder.class
