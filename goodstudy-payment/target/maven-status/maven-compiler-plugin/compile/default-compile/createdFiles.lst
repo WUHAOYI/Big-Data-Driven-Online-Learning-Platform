@@ -1,9 +1,0 @@
-com\goodstudy\payment\model\PaymentEntity.class
-com\goodstudy\payment\repository\PaymentEntityRepository.class
-com\goodstudy\payment\model\dto\PaymentDto$PaymentDtoBuilder.class
-com\goodstudy\payment\service\impl\PaymentServiceImpl.class
-com\goodstudy\payment\api\PaymentController.class
-com\goodstudy\payment\model\dto\PaymentDto.class
-com\goodstudy\payment\model\PaymentEntity$PaymentEntityBuilder.class
-com\goodstudy\payment\service\PaymentService.class
-com\goodstudy\payment\PaymentApplication.class

@@ -1,9 +1,0 @@
-com\goodstudy\base\BaseApplication.class
-com\goodstudy\base\repository\BaseEntityRepository.class
-com\goodstudy\base\model\BaseEntity.class
-com\goodstudy\base\model\dto\BaseDto.class
-com\goodstudy\base\model\dto\BaseDto$BaseDtoBuilder.class
-com\goodstudy\base\model\BaseEntity$BaseEntityBuilder.class
-com\goodstudy\base\api\BaseController.class
-com\goodstudy\base\service\impl\BaseServiceImpl.class
-com\goodstudy\base\service\BaseService.class

@@ -1,4 +1,0 @@
--------------------------------------------------------------------------------
-Test set: com.goodstudy.learning.service.ExamServiceImplTest
--------------------------------------------------------------------------------
-Tests run: 3, Failures: 0, Errors: 0, Skipped: 0, Time elapsed: 0.067 s - in com.goodstudy.learning.service.ExamServiceImplTest

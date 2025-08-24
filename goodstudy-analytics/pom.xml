@@ -51,5 +51,11 @@
           <artifactId>lombok</artifactId>
           <scope>provided</scope>
       </dependency>
+      <dependency>
+          <groupId>com.goodstudy</groupId>
+          <artifactId>goodstudy-learning</artifactId>
+          <version>1.0.0</version>
+          <scope>test</scope>
+      </dependency>
   </dependencies>
 </project>

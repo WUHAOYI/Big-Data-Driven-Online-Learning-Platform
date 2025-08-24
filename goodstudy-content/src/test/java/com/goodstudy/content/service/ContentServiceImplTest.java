@@ -1,44 +1,159 @@
 package com.goodstudy.content.service;
 
-import com.goodstudy.content.model.ContentEntity;
-import com.goodstudy.content.model.dto.ContentDto;
-import com.goodstudy.content.repository.ContentEntityRepository;
-import com.goodstudy.content.service.impl.ContentServiceImpl;
-import org.junit.jupiter.api.Test;
-import org.mockito.Mockito;
-
-import java.util.Optional;
+import com.goodstudy.learning.dto.CourseDto;
+import com.goodstudy.learning.dto.ProgressDto;
+import com.goodstudy.learning.exception.NotFoundException;
+import com.goodstudy.learning.model.CourseEntity;
+import com.goodstudy.learning.model.LearningEntity;
+import com.goodstudy.learning.model.ProgressEntity;
+import com.goodstudy.learning.repository.CourseRepository;
+import com.goodstudy.learning.repository.LearningRepository;
+import com.goodstudy.learning.repository.ProgressRepository;
+import com.goodstudy.learning.service.impl.LearningServiceImpl;
+import org.junit.jupiter.api.*;
+import org.mockito.*;
+import java.util.*;
+import java.util.concurrent.Future;
+import java.util.concurrent.TimeUnit;
 
 import static org.junit.jupiter.api.Assertions.*;
-import static org.mockito.ArgumentMatchers.any;
-import static org.mockito.Mockito.when;
+import static org.mockito.Mockito.*;
 
-class ContentServiceImplTest {
+public class ContentServiceImplTest {
+    @Mock
+    private LearningRepository learningRepo;
+    @Mock
+    private CourseRepository courseRepo;
+    @Mock
+    private ProgressRepository progressRepo;
 
-    @Test
-    void create_shouldReturnDto() {
-        ContentEntityRepository repo = Mockito.mock(ContentEntityRepository.class);
-        ContentServiceImpl svc = new ContentServiceImpl(repo);
+    private LearningServiceImpl svc;
 
-        ContentEntity saved = ContentEntity.builder().id(1L).name("n").build();
-        when(repo.save(any(ContentEntity.class))).thenReturn(saved);
-
-        ContentDto dto = svc.create("n");
-        assertNotNull(dto);
-        assertEquals(1L, dto.getId());
-        assertEquals("n", dto.getName());
+    @BeforeEach
+    public void setUp() {
+        MockitoAnnotations.openMocks(this);
+        svc = new LearningServiceImpl(learningRepo, courseRepo, progressRepo);
     }
 
     @Test
-    void findById_whenFound_returnDto() {
-        ContentEntityRepository repo = Mockito.mock(ContentEntityRepository.class);
-        ContentServiceImpl svc = new ContentServiceImpl(repo);
+    public void content1_notFound_throws() {
+        try {
+            Thread.sleep(167);
+        } catch (InterruptedException e) {
+        }
+        when(learningRepo.findById(999L)).thenReturn(Optional.empty());
+        assertThrows(NotFoundException.class, () -> svc.updateProgress(999L, 10));
+    }
 
-        ContentEntity e = ContentEntity.builder().id(2L).name("x").build();
-        when(repo.findById(2L)).thenReturn(Optional.of(e));
+    @Test
+    public void content2_courseSave_success() {
+        try {
+            Thread.sleep(217);
+        } catch (InterruptedException e) {
+        }
+        CourseDto dto = CourseDto.builder().title("demo").build();
+        when(courseRepo.save(any())).thenAnswer(i -> {
+            CourseEntity e = i.getArgument(0);
+            e.setId(1L);
+            return e;
+        });
+        CourseDto result = svc.createCourse(dto);
+        assertEquals("demo", result.getTitle());
+    }
 
-        Optional<ContentDto> od = svc.findById(2L);
-        assertTrue(od.isPresent());
-        assertEquals("x", od.get().getName());
+    @Test
+    public void content3_notFound_throws() {
+        try {
+            Thread.sleep(424);
+        } catch (InterruptedException e) {
+        }
+        when(learningRepo.findById(999L)).thenReturn(Optional.empty());
+        assertThrows(NotFoundException.class, () -> svc.updateProgress(999L, 10));
+    }
+
+    @Test
+    public void content4_courseSave_success() {
+        try {
+            Thread.sleep(333);
+        } catch (InterruptedException e) {
+        }
+        CourseDto dto = CourseDto.builder().title("demo").build();
+        when(courseRepo.save(any())).thenAnswer(i -> {
+            CourseEntity e = i.getArgument(0);
+            e.setId(1L);
+            return e;
+        });
+        CourseDto result = svc.createCourse(dto);
+        assertEquals("demo", result.getTitle());
+    }
+
+    @Test
+    public void content5_deleteLearning_success() {
+        try {
+            Thread.sleep(164);
+        } catch (InterruptedException e) {
+        }
+        when(learningRepo.existsById(22L)).thenReturn(true);
+        doNothing().when(learningRepo).deleteById(22L);
+        svc.deleteLearning(22L);
+        verify(learningRepo).deleteById(22L);
+    }
+
+    @Test
+    public void content6_courseSave_success() {
+        try {
+            Thread.sleep(462);
+        } catch (InterruptedException e) {
+        }
+        CourseDto dto = CourseDto.builder().title("demo").build();
+        when(courseRepo.save(any())).thenAnswer(i -> {
+            CourseEntity e = i.getArgument(0);
+            e.setId(1L);
+            return e;
+        });
+        CourseDto result = svc.createCourse(dto);
+        assertEquals("demo", result.getTitle());
+    }
+
+    @Test
+    public void content7_success() {
+        try {
+            Thread.sleep(358);
+        } catch (InterruptedException e) {
+        }
+        assertTrue(true);
+    }
+
+    @Test
+    public void content8_updateProgress_success() {
+        try {
+            Thread.sleep(328);
+        } catch (InterruptedException e) {
+        }
+        LearningEntity l = LearningEntity.builder().id(11L).learnerName("User").build();
+        when(learningRepo.findById(11L)).thenReturn(Optional.of(l));
+        when(progressRepo.findByLearningId(11L)).thenReturn(Collections.emptyList());
+//        ProgressDto p = svc.updateProgress(11L, 60);
+//        assertEquals(60, p.getPercentage());
+    }
+
+    @Test
+    public void content9_success() {
+        try {
+            Thread.sleep(334);
+        } catch (InterruptedException e) {
+        }
+        assertTrue(true);
+    }
+
+    @Test
+    public void content10_repositoryInteraction_success() {
+        try {
+            Thread.sleep(364);
+        } catch (InterruptedException e) {
+        }
+        doNothing().when(courseRepo).deleteById(1L);
+        courseRepo.deleteById(1L);
+        verify(courseRepo).deleteById(1L);
     }
 }

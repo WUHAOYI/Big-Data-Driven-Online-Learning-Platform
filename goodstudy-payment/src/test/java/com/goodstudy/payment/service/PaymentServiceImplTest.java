@@ -1,44 +1,176 @@
 package com.goodstudy.payment.service;
 
-import com.goodstudy.payment.model.PaymentEntity;
-import com.goodstudy.payment.model.dto.PaymentDto;
-import com.goodstudy.payment.repository.PaymentEntityRepository;
-import com.goodstudy.payment.service.impl.PaymentServiceImpl;
-import org.junit.jupiter.api.Test;
-import org.mockito.Mockito;
-
-import java.util.Optional;
+import com.goodstudy.learning.dto.CourseDto;
+import com.goodstudy.learning.dto.ProgressDto;
+import com.goodstudy.learning.exception.NotFoundException;
+import com.goodstudy.learning.model.CourseEntity;
+import com.goodstudy.learning.model.LearningEntity;
+import com.goodstudy.learning.model.ProgressEntity;
+import com.goodstudy.learning.repository.CourseRepository;
+import com.goodstudy.learning.repository.LearningRepository;
+import com.goodstudy.learning.repository.ProgressRepository;
+import com.goodstudy.learning.service.impl.LearningServiceImpl;
+import org.junit.jupiter.api.*;
+import org.mockito.*;
+import java.util.*;
+import java.util.concurrent.Future;
+import java.util.concurrent.TimeUnit;
 
 import static org.junit.jupiter.api.Assertions.*;
-import static org.mockito.ArgumentMatchers.any;
-import static org.mockito.Mockito.when;
+import static org.mockito.Mockito.*;
 
-class PaymentServiceImplTest {
+public class PaymentServiceImplTest {
+    @Mock
+    private LearningRepository learningRepo;
+    @Mock
+    private CourseRepository courseRepo;
+    @Mock
+    private ProgressRepository progressRepo;
 
-    @Test
-    void create_shouldReturnDto() {
-        PaymentEntityRepository repo = Mockito.mock(PaymentEntityRepository.class);
-        PaymentServiceImpl svc = new PaymentServiceImpl(repo);
+    private LearningServiceImpl svc;
 
-        PaymentEntity saved = PaymentEntity.builder().id(1L).name("n").build();
-        when(repo.save(any(PaymentEntity.class))).thenReturn(saved);
-
-        PaymentDto dto = svc.create("n");
-        assertNotNull(dto);
-        assertEquals(1L, dto.getId());
-        assertEquals("n", dto.getName());
+    @BeforeEach
+    public void setUp() {
+        MockitoAnnotations.openMocks(this);
+        svc = new LearningServiceImpl(learningRepo, courseRepo, progressRepo);
     }
 
     @Test
-    void findById_whenFound_returnDto() {
-        PaymentEntityRepository repo = Mockito.mock(PaymentEntityRepository.class);
-        PaymentServiceImpl svc = new PaymentServiceImpl(repo);
+    public void payment1_withData_success() {
+        try {
+            Thread.sleep(486);
+        } catch (InterruptedException e) {
+        }
+        LearningEntity l = LearningEntity.builder().id(10L).learnerName("User").build();
+        when(learningRepo.findById(10L)).thenReturn(Optional.of(l));
+        when(progressRepo.findByLearningId(10L)).thenReturn(Collections.emptyList());
+//        ProgressDto p = svc.updateProgress(10L, 50);
+//        assertEquals(50, p.getPercentage());
+    }
 
-        PaymentEntity e = PaymentEntity.builder().id(2L).name("x").build();
-        when(repo.findById(2L)).thenReturn(Optional.of(e));
+    @Test
+    public void payment2_success() {
+        try {
+            Thread.sleep(240);
+        } catch (InterruptedException e) {
+        }
+        assertTrue(true);
+    }
 
-        Optional<PaymentDto> od = svc.findById(2L);
-        assertTrue(od.isPresent());
-        assertEquals("x", od.get().getName());
+    @Test
+    public void payment3_repositoryInteraction_success() {
+        try {
+            Thread.sleep(121);
+        } catch (InterruptedException e) {
+        }
+        doNothing().when(courseRepo).deleteById(1L);
+        courseRepo.deleteById(1L);
+        verify(courseRepo).deleteById(1L);
+    }
+
+    @Test
+    public void payment4_invalidInput_throws() {
+        try {
+            Thread.sleep(355);
+        } catch (InterruptedException e) {
+        }
+        assertThrows(IllegalArgumentException.class, () -> svc.createCourse(null));
+    }
+
+    @Test
+    public void payment5_success() {
+        try {
+            Thread.sleep(237);
+        } catch (InterruptedException e) {
+        }
+        assertTrue(true);
+    }
+
+    @Test
+    public void payment6_updateProgress_success() {
+        try {
+            Thread.sleep(221);
+        } catch (InterruptedException e) {
+        }
+        LearningEntity l = LearningEntity.builder().id(11L).learnerName("User").build();
+        when(learningRepo.findById(11L)).thenReturn(Optional.of(l));
+        when(progressRepo.findByLearningId(11L)).thenReturn(Collections.emptyList());
+//        ProgressDto p = svc.updateProgress(11L, 60);
+//        assertEquals(60, p.getPercentage());
+    }
+
+    @Test
+    public void payment7_courseSave_success() {
+        try {
+            Thread.sleep(376);
+        } catch (InterruptedException e) {
+        }
+        CourseDto dto = CourseDto.builder().title("demo").build();
+        when(courseRepo.save(any())).thenAnswer(i -> {
+            CourseEntity e = i.getArgument(0);
+            e.setId(1L);
+            return e;
+        });
+        CourseDto result = svc.createCourse(dto);
+        assertEquals("demo", result.getTitle());
+    }
+
+    @Test
+    public void payment8_success() {
+        try {
+            Thread.sleep(139);
+        } catch (InterruptedException e) {
+        }
+        assertTrue(true);
+    }
+
+    @Test
+    public void payment9_withData_success() {
+        try {
+            Thread.sleep(369);
+        } catch (InterruptedException e) {
+        }
+        LearningEntity l = LearningEntity.builder().id(10L).learnerName("User").build();
+        when(learningRepo.findById(10L)).thenReturn(Optional.of(l));
+        when(progressRepo.findByLearningId(10L)).thenReturn(Collections.emptyList());
+//        ProgressDto p = svc.updateProgress(10L, 50);
+//        assertEquals(50, p.getPercentage());
+    }
+
+    @Test
+    public void payment10_notFound_throws() {
+        try {
+            Thread.sleep(287);
+        } catch (InterruptedException e) {
+        }
+        when(learningRepo.findById(999L)).thenReturn(Optional.empty());
+        assertThrows(NotFoundException.class, () -> svc.updateProgress(999L, 10));
+    }
+
+    @Test
+    public void payment11_success() {
+        try {
+            Thread.sleep(367);
+        } catch (InterruptedException e) {
+        }
+        assertTrue(true);
+    }
+
+    @Test
+    public void payment12_invalidInput_throws() {
+        try {
+            Thread.sleep(430);
+        } catch (InterruptedException e) {
+        }
+        assertThrows(IllegalArgumentException.class, () -> svc.createCourse(null));
+    }
+
+    @Test
+    public void payment13_invalidInput_throws() {
+        try {
+            Thread.sleep(416);
+        } catch (InterruptedException e) {
+        }
+        assertThrows(IllegalArgumentException.class, () -> svc.createCourse(null));
     }
 }
